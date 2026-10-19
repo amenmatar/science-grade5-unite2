@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أوراق عمل أنشطة العلوم - الخامس الأساسي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Reem+Kufi:wght@600;700&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        kufi: ['Reem Kufi', 'sans-serif'],
+                        handwriting: ['Aref Ruqaa', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f172a;
+            color: #0f172a;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* قياس صفحة A4 ممتلئة ومتناسقة بدون أي فراغ زائد */
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            max-width: 100%;
+            margin: 0 auto 1.5rem auto;
+            background-color: #ffffff;
+            padding: 8mm 10mm 8mm 10mm;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        .activity-title-box {
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+            color: #78350f;
+            border-radius: 10px;
+            padding: 4px 14px;
+            font-weight: 800;
+        }
+
+        /* خط الإجابة الواضح والبارز وبدون تقاطع */
+        .answer-text {
+            font-family: 'Aref Ruqaa', serif;
+            color: #1e40af; /* أزرق ملكي داكن وواضح */
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 1.4;
+            background-color: #eff6ff;
+            padding: 2px 10px;
+            border-right: 4px solid #2563eb;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .a4-page {
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                padding: 8mm 10mm 8mm 10mm !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+            }
+        }
+    </style>
+</head>
+<body class="py-6">
+
+    <!-- شريط الطباعة العلوي -->
+    <div class="no-print max-w-4xl mx-auto mb-4 px-4 flex justify-between items-center bg-slate-800 p-3 rounded-xl border border-slate-700 shadow-xl">
+        <div class="text-white font-bold text-base flex items-center gap-2">
+            <i class="fa-solid fa-file-pdf text-amber-400 text-xl"></i>
+            <span>أوراق عمل أنشطة العلوم (A4 - صفحتان مكتملتان بالكامل)</span>
+        </div>
+        <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-400 text-slate-900 font-black text-sm px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-lg transition cursor-pointer">
+            <i class="fa-solid fa-print text-lg"></i>
+            <span>طباعة الورقتين (A4)</span>
+        </button>
+    </div>
+
+    <!-- Container for Both Pages -->
+    <div class="space-y-8 max-w-[210mm] mx-auto">
+
+        <!-- ==================== الصفحة الأولى: تجمع نشاط (1) + نشاط (2) ==================== -->
+        <div class="a4-page">
+            
+            <!-- الترويسة المتبسطة -->
+            <div class="border-b-2 border-slate-800 pb-2 mb-2">
+                <div class="text-center mb-1">
+                    <h1 class="text-base font-black text-slate-900 font-kufi">مدرسة ذكور طمون الأساسية العليا</h1>
+                </div>
+                <div class="flex justify-between items-center text-xs font-bold text-slate-800 px-1">
+                    <div class="text-right space-y-0.5">
+                        <div>الصف الخامس الأساسي</div>
+                        <div class="text-emerald-700">العلوم والحياة</div>
+                    </div>
+                    <div class="text-left space-y-0.5">
+                        <div class="text-amber-800">الوحدة الثانية: خصائص المادة</div>
+                        <div class="text-sky-700">الدرس الأول: أنواع المادة وخصائصها</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محتوى الصفحة الأولى (نشاط 1 + نشاط 2) -->
+            <div class="flex-1 flex flex-col justify-between space-y-3">
+
+                <!-- ===== النصف العلوي: نشاط (1) ===== -->
+                <div class="border-2 border-amber-200 bg-amber-50/30 p-3 rounded-xl flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="activity-title-box flex items-center gap-2 text-xs">
+                                <i class="fa-solid fa-flask text-amber-600 text-sm"></i>
+                                <span>نَشاط (1): المادَّة</span>
+                            </div>
+                            <span class="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-300">صفحة 26</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-3 items-stretch">
+                            <!-- الأسئلة -->
+                            <div class="col-span-8 space-y-2 text-slate-900 text-xs">
+                                <div class="grid grid-cols-3 gap-1 text-center bg-white p-1.5 rounded-lg border border-amber-200 font-bold shadow-sm">
+                                    <div class="text-amber-900"><i class="fa-solid fa-cube text-stone-600 ml-1"></i>حجر صغير</div>
+                                    <div class="text-amber-900"><i class="fa-solid fa-weight-scale text-slate-600 ml-1"></i>ميزان حساس</div>
+                                    <div class="text-amber-900"><i class="fa-solid fa-glass-water text-sky-600 ml-1"></i>مخبار مدرج</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">1. أُسَجِّلُ قِراءةَ الميزانِ للحجر:</span><br>
+                                    <div class="answer-text">45 جراماً</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">2. حجم الماء الجديد بعد وضع الحجر:</span><br>
+                                    <div class="answer-text">220 سم³</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">3. خَصائِصُ الحَجَرِ الَّتي قُمْتَ بِقياسِها:</span><br>
+                                    <div class="answer-text">الكُتْلَةُ وَالحَجْمُ</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">4. يُسَمّى الحَجَرُ مادّةً لأنَّ له:</span><br>
+                                    <div class="answer-text">كُتْلَةً وَحَجْماً (يَشْغَلُ حَيِّزاً مِنَ الفَراغِ)</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">5. تَعْريفُ المادَّةِ:</span><br>
+                                    <div class="answer-text w-full">كُلُّ ما لَهُ كُتْلَةٌ وَيَشْغَلُ حَيِّزاً مِنَ الفَراغِ.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">6. مَوادٌّ مِن بيئَتي:</span><br>
+                                    <div class="answer-text w-full">الخَشَب، الحَديد، المَاء، الهَوَاء، الصَّخْر.</div>
+                                </div>
+
+                                <div class="bg-amber-100/80 p-1.5 rounded-lg border-r-4 border-amber-600 text-xs mt-1">
+                                    <span class="font-bold text-amber-950">7. ماذا نَفْعَلُ بِالماءِ بَعْدَ النشاط؟</span><br>
+                                    <div class="answer-text">نَسْتَفيدُ مِنْهُ في رَيِّ حَديقَةِ المَدْرَسَةِ لِعَدَمِ الهَدْرِ.</div>
+                                </div>
+                            </div>
+
+                            <!-- البطاقة الجانبية الناطقة الشارحة -->
+                            <div class="col-span-4 bg-gradient-to-b from-slate-900 via-sky-950 to-slate-900 p-3 rounded-2xl border-2 border-sky-400 text-white flex flex-col justify-between items-center text-center shadow-md">
+                                <div class="w-12 h-12 rounded-full bg-sky-500 border-2 border-white flex items-center justify-center text-white text-xl shadow-lg mt-1">
+                                    <i class="fa-solid fa-user-astronaut"></i>
+                                </div>
+                                <span class="bg-sky-500/30 text-sky-300 font-black text-xs px-2.5 py-1 rounded-full border border-sky-400 my-2">
+                                    المُعَلِّمُ الذَّكِيُّ
+                                </span>
+                                <div class="bg-slate-800/80 p-2.5 rounded-xl border border-sky-300/40 my-auto">
+                                    <p class="text-xs leading-relaxed font-bold text-amber-300">
+                                        "أَيُّ شَيْءٍ لَهُ كُتْلَةٌ وَيَأْخُذُ مَكاناً في الفَضاءِ فَهُوَ <span class="text-white font-extrabold underline">مادَّةٌ</span>!"
+                                    </p>
+                                </div>
+                                <div class="text-[10px] text-sky-200 bg-sky-900/50 px-2 py-1 rounded border border-sky-700/50 w-full mt-1">
+                                    💡 الكتلة بالجرام والسر بالحجم!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== النصف السفلي: نشاط (2) ===== -->
+                <div class="border-2 border-emerald-200 bg-emerald-50/30 p-3 rounded-xl flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="activity-title-box bg-emerald-100 border-emerald-500 text-emerald-950 flex items-center gap-2 text-xs">
+                                <i class="fa-solid fa-shapes text-emerald-600 text-sm"></i>
+                                <span>نَشاط (2): تَصْنيفُ المَوادِّ</span>
+                            </div>
+                            <span class="text-xs font-black text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">صفحة 27</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-3 items-stretch">
+                            <!-- الأسئلة -->
+                            <div class="col-span-8 space-y-2 text-slate-900 text-xs">
+                                <div class="bg-white p-1.5 rounded-lg border border-emerald-300 text-center shadow-sm">
+                                    <span class="font-bold text-emerald-900">🏖️ مشهد الشاطئ (بحر بلادي والمواد المتنوعة)</span>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">1. أُصَنِّفُ المَوادَّ المَوْجودَةَ في الصُّورَةِ:</span>
+                                    <div class="answer-text w-full">
+                                        • صَلْبَة: الأسماك، الطاولة، الكرسي، الرمل.<br>
+                                        • سَائِلَة: ماء البحر، الزيت، العصير.<br>
+                                        • غَازِيَّة: الهواء الجوي، الدخان.
+                                    </div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">2. أُقارِنُ إجـابَتي مَعَ زَميلي:</span><br>
+                                    <div class="answer-text w-full">تَتَشابَهُ الإِجابَاتُ، وَقَدْ نَخْتَلِفُ في مِعْيارِ التَّصْنيفِ.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">3. أَقْتَرِحُ طَرائِقَ أُخْرى لِلْتَّصْنيفِ:</span><br>
+                                    <div class="answer-text w-full">حَسَبَ: المَصْدَرِ (طَبيعِيَّة / صِناعِيَّة) أَوْ النَّقاءِ (نَقِيَّة / خَلِيط).</div>
+                                </div>
+                            </div>
+
+                            <!-- البطاقة الجانبية الناطقة الشارحة -->
+                            <div class="col-span-4 bg-gradient-to-b from-slate-900 via-emerald-950 to-slate-900 p-3 rounded-2xl border-2 border-emerald-400 text-white flex flex-col justify-between items-center text-center shadow-md">
+                                <div class="w-12 h-12 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-xl shadow-lg mt-1">
+                                    <i class="fa-solid fa-cubes"></i>
+                                </div>
+                                <span class="bg-emerald-500/30 text-emerald-300 font-black text-xs px-2.5 py-1 rounded-full border border-emerald-400 my-2">
+                                    حالات المادة الثلاث
+                                </span>
+                                <div class="bg-slate-800/80 p-2.5 rounded-xl border border-emerald-300/40 my-auto space-y-1">
+                                    <p class="text-xs leading-relaxed font-bold text-slate-100">
+                                        تُصَنَّفُ المَوادُّ في الطَّبيعةِ إلى:
+                                    </p>
+                                    <div class="text-amber-300 font-black text-xs">
+                                        💎 صَلْبَة | 💧 سائِلَة | 💨 غازِيَّة
+                                    </div>
+                                </div>
+                                <div class="text-[10px] text-emerald-200 bg-emerald-900/50 px-2 py-1 rounded border border-emerald-700/50 w-full mt-1">
+                                    🌿 لكل حالة خصائصها الفريدة!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- التذييل السفلي للورقة الأولى -->
+            <div class="pt-2 mt-2 border-t-2 border-slate-800 text-xs font-black text-slate-900 flex justify-between items-center">
+                <div>المدرسة: <span class="text-blue-900">مدرسة ذكور طمون الأساسية العليا</span></div>
+                <div>المعلم: <span class="text-emerald-800">أ. أمين عبدالرازق</span></div>
+            </div>
+        </div>
+
+        <!-- ==================== الصفحة الثانية: تجمع نشاط (3) + نشاط (4) ==================== -->
+        <div class="a4-page">
+            
+            <!-- الترويسة المتبسطة -->
+            <div class="border-b-2 border-slate-800 pb-2 mb-2">
+                <div class="text-center mb-1">
+                    <h1 class="text-base font-black text-slate-900 font-kufi">مدرسة ذكور طمون الأساسية العليا</h1>
+                </div>
+                <div class="flex justify-between items-center text-xs font-bold text-slate-800 px-1">
+                    <div class="text-right space-y-0.5">
+                        <div>الصف الخامس الأساسي</div>
+                        <div class="text-emerald-700">العلوم والحياة</div>
+                    </div>
+                    <div class="text-left space-y-0.5">
+                        <div class="text-amber-800">الوحدة الثانية: خصائص المادة</div>
+                        <div class="text-sky-700">الدرس الأول: أنواع المادة وخصائصها</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محتوى الصفحة الثانية (نشاط 3 + نشاط 4) -->
+            <div class="flex-1 flex flex-col justify-between space-y-3">
+
+                <!-- ===== النصف العلوي: نشاط (3) ===== -->
+                <div class="border-2 border-purple-200 bg-purple-50/30 p-3 rounded-xl flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="activity-title-box bg-purple-100 border-purple-500 text-purple-950 flex items-center gap-2 text-xs">
+                                <i class="fa-solid fa-atom text-purple-600 text-sm"></i>
+                                <span>نَشاط (3): المادَّةُ النَّقِيَّةُ والمادَّةُ غَيْرُ النَّقِيَّةِ</span>
+                            </div>
+                            <span class="text-xs font-black text-purple-700 bg-purple-100 px-3 py-1 rounded-full border border-purple-300">صفحة 28</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-3 items-stretch">
+                            <!-- الأسئلة -->
+                            <div class="col-span-8 space-y-2 text-slate-900 text-xs">
+                                <div class="grid grid-cols-3 gap-1 text-center bg-white p-1.5 rounded-lg border border-purple-200 font-bold shadow-sm">
+                                    <div class="text-purple-900">🔍 عدسة مكبرة</div>
+                                    <div class="text-purple-900">⚙️ برادة ألومنيوم</div>
+                                    <div class="text-purple-900">🧂 سُكَّر</div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="space-y-0.5">
+                                        <span class="font-bold">1. برادة الألومنيوم نوع واحد؟</span><br>
+                                        <div class="answer-text">نَعَمْ</div>
+                                    </div>
+
+                                    <div class="space-y-0.5">
+                                        <span class="font-bold">2. حبيبات السكر نوع واحد؟</span><br>
+                                        <div class="answer-text">نَعَمْ</div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">3. أُسَمّي كُلاًّ مِنْهُما بـ المادَّةِ النَّقِيَّةِ. لِماذا؟</span><br>
+                                    <div class="answer-text w-full">لِأَنَّ كُلاًّ مِنْهُما يَتَكَّوَنُ مِنْ نَوْعٍ واحِدٍ فَقَطْ مِنَ الدَّقائِقِ.</div>
+                                </div>
+
+                                <div class="pt-1 border-t border-purple-200 text-purple-950 font-bold">
+                                    * أُضيفُ البرادة إلى السُّكَّرِ:
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">1. هل الخليط الناتج من النوع نفسه؟</span><br>
+                                    <div class="answer-text">لا (غير نقي)</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">2. تُسَمّى المادَّةُ غَيْرَ نَقِيَّةٍ لِأَنَّها:</span><br>
+                                    <div class="answer-text w-full">تَتَكَّوَنُ مِنْ نَوْعَيْنِ أَوْ أَكْثَرَ مِنَ الدَّقائِقِ المُخْتَلِفَةِ.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">3. المادَّة النَّقِيَّة وغَيْر النَّقِيَّة:</span><br>
+                                    <div class="answer-text w-full">النَّقِيَّة: دقائقها متشابهة. غَيْرُ النَّقِيَّة: مزيج دقائق متعددة.</div>
+                                </div>
+                            </div>
+
+                            <!-- البطاقة الجانبية الناطقة الشارحة -->
+                            <div class="col-span-4 bg-gradient-to-b from-slate-900 via-purple-950 to-slate-900 p-3 rounded-2xl border-2 border-purple-400 text-white flex flex-col justify-between items-center text-center shadow-md">
+                                <div class="w-12 h-12 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-white text-xl shadow-lg mt-1">
+                                    <i class="fa-solid fa-microscope"></i>
+                                </div>
+                                <span class="bg-purple-500/30 text-purple-300 font-black text-xs px-2.5 py-1 rounded-full border border-purple-400 my-2">
+                                    سِرُّ الدَّقائِقِ
+                                </span>
+                                <div class="bg-slate-800/80 p-2.5 rounded-xl border border-purple-300/40 my-auto space-y-1">
+                                    <p class="text-xs leading-relaxed font-bold text-amber-300">
+                                        "المادَّةُ <span class="text-white underline">النَّقِيَّةُ</span> دقائقها نوع واحد متماثل."
+                                    </p>
+                                    <p class="text-[11px] text-purple-200 font-bold">
+                                        أما المخلوط ففيها أنواع مختلفة!
+                                    </p>
+                                </div>
+                                <div class="text-[10px] text-purple-200 bg-purple-900/50 px-2 py-1 rounded border border-purple-700/50 w-full mt-1">
+                                    🔬 الدقائق هي اللبنة الأساسية
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== النصف السفلي: نشاط (4) ===== -->
+                <div class="border-2 border-red-200 bg-red-50/30 p-3 rounded-xl flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="activity-title-box bg-red-100 border-red-500 text-red-950 flex items-center gap-2 text-xs">
+                                <i class="fa-solid fa-magnet text-red-600 text-sm"></i>
+                                <span>نَشاط (4): أَنَا المَخْلُوط</span>
+                            </div>
+                            <span class="text-xs font-black text-red-700 bg-red-100 px-3 py-1 rounded-full border border-red-300">صفحة 29</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-3 items-stretch">
+                            <!-- الأسئلة -->
+                            <div class="col-span-8 space-y-2 text-slate-900 text-xs">
+                                <div class="grid grid-cols-3 gap-1 text-center bg-white p-1.5 rounded-lg border border-red-200 font-bold shadow-sm">
+                                    <div class="text-red-900">🍚 أَرُزّ</div>
+                                    <div class="text-red-900">⚙️ برادة حديد</div>
+                                    <div class="text-red-900">🧲 مغناطيس</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">1. أُقَرِّبُ المِغْناطيسَ مِن كُلٍّ مِنْهُما:</span><br>
+                                    <div class="answer-text w-full">تَنْجَذِبُ بَرادَةُ الحَديدِ، وَلا يَنْجَذِبُ الأَرُزُّ.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">2. أُقَرِّبُ المِغْناطيسَ مِنَ الخَليطِ:</span><br>
+                                    <div class="answer-text w-full">تَنْجَذِبُ بَرادَةُ الحَديدِ وتَنْفَصِلُ عَنِ الأَرُزِّ بِسُهولَةٍ.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">3. هَلْ تَغَيَّرَتْ خَصائِصُ المَوادِّ بَعْدَ الخَلْطِ؟</span><br>
+                                    <div class="answer-text">لا، حافَظَتْ كُلُّ مادَّةٍ عَلى خَصائِصِها.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">4. هَلِ المَخْلُوطُ مادَّةٌ نَقِيَّةٌ أَمْ غَيْرُ نَقِيَّةٍ؟ ولماذا؟</span><br>
+                                    <div class="answer-text w-full">غَيْرُ نَقِيَّةٍ؛ لِأَنَّهُ ناتِجٌ عَنْ خَلْطِ مادَّتَيْنِ أَوْ أَكْثَرَ.</div>
+                                </div>
+
+                                <div class="space-y-0.5">
+                                    <span class="font-bold">5. تَعْريفُ المَخْلُوطِ:</span><br>
+                                    <div class="answer-text w-full">مَزيجٌ مِن خَلْطِ مادَّتَيْنِ أو أكثَرَ مع احْتِفاظِ كُلِّ مادَّةٍ بِخَصائِصِها.</div>
+                                </div>
+                            </div>
+
+                            <!-- البطاقة الجانبية الناطقة الشارحة -->
+                            <div class="col-span-4 bg-gradient-to-b from-slate-900 via-red-950 to-slate-900 p-3 rounded-2xl border-2 border-red-400 text-white flex flex-col justify-between items-center text-center shadow-md">
+                                <div class="w-12 h-12 rounded-full bg-red-500 border-2 border-white flex items-center justify-center text-white text-xl shadow-lg mt-1">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <span class="bg-red-500/30 text-red-300 font-black text-xs px-2.5 py-1 rounded-full border border-red-400 my-2">
+                                    خَاصِّيَّةُ المَخَالِيطِ
+                                </span>
+                                <div class="bg-slate-800/80 p-2.5 rounded-xl border border-red-300/40 my-auto space-y-1">
+                                    <p class="text-xs leading-relaxed font-bold text-amber-300">
+                                        "المَخْلُوطُ يُفْصَلُ بِطُرُقٍ بَسيطَةٍ <span class="text-white underline">دُونَ أن تتغير</span> صِفاتُ المَوادِّ!"
+                                    </p>
+                                </div>
+                                <div class="text-[10px] text-red-200 bg-red-900/50 px-2 py-1 rounded border border-red-700/50 w-full mt-1">
+                                    🧲 المغناطيس يفصل الحديد بسهولة!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- التذييل السفلي للورقة الثانية -->
+            <div class="pt-2 mt-2 border-t-2 border-slate-800 text-xs font-black text-slate-900 flex justify-between items-center">
+                <div>المدرسة: <span class="text-blue-900">مدرسة ذكور طمون الأساسية العليا</span></div>
+                <div>المعلم: <span class="text-emerald-800">أ. أمين عبدالرازق</span></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
