@@ -51,13 +51,20 @@ function draw(){
    if(isPicked){
     ctx.beginPath();ctx.arc(0,0,outer-7,a,a+arc);ctx.strokeStyle='#fff3c4';ctx.lineWidth=4;ctx.stroke();
    }
-   ctx.save();ctx.rotate(midA);ctx.textAlign='right';ctx.textBaseline='middle';
+   ctx.save();ctx.rotate(midA);ctx.textAlign='center';ctx.textBaseline='middle';
    ctx.fillStyle=isPicked?'#102a43':'#ffffff';
-   if(n>16){ctx.font='bold '+(isPicked?31:17)+'px Tahoma';ctx.fillText(String(i+1),outer-24,0,95);}
+   if(isPicked){
+    ctx.font='bold 17px Tahoma';
+    const words=qs[i].split(/\\s+/),lines=[];let line='';
+    for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>265&&line){lines.push(line);line=word;}else line=test;}
+    if(line)lines.push(line);
+    const shown=lines.slice(0,6),lineH=21,startY=-(shown.length-1)*lineH/2;
+    shown.forEach((part,k)=>ctx.fillText(part,outer*.57,startY+k*lineH,270));
+   }else if(n>16){ctx.font='bold 17px Tahoma';ctx.fillText(String(i+1),outer-24,0,95);}
    else{
-    ctx.font='bold '+(isPicked?23:20)+'px Tahoma';
+    ctx.font='bold 20px Tahoma';
     let label=qs[i].length>32?qs[i].slice(0,30)+'…':qs[i];
-    ctx.fillText(label,outer-22,0,isPicked?290:270);
+    ctx.fillText(label,outer-22,0,270);
    }
    ctx.restore();ctx.restore();
   }
