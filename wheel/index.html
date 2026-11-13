@@ -33,47 +33,30 @@ function draw(){
   ctx.fillStyle='#234';ctx.font='bold 30px Tahoma';ctx.textAlign='center';ctx.fillText('أضف أسئلة للبدء',mid,mid);return;
  }
  const arc=2*Math.PI/n;
- ctx.save();
- ctx.translate(mid,mid);
- ctx.rotate(angle);
- // ارسم القطاعات العادية أولًا، ثم القطاع المختار فوقها دون تغيير حجمه.
- for(let pass=0;pass<2;pass++){
-  for(let i=0;i<n;i++){
-   const isPicked=i===picked;
-   if((pass===0&&isPicked)||(pass===1&&!isPicked))continue;
-   const a=-Math.PI/2+i*arc,midA=a+arc/2;
-   ctx.save();
-   ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,r,a,a+arc);ctx.closePath();
-   if(isPicked){ctx.shadowColor='rgba(16,42,67,.35)';ctx.shadowBlur=12;}
-   ctx.fillStyle=isPicked?'#ffd166':palette[i%palette.length];ctx.fill();
-   ctx.shadowColor='transparent';ctx.shadowBlur=0;
-   ctx.strokeStyle=isPicked?'#102a43':'#ffffff';ctx.lineWidth=isPicked?8:5;ctx.stroke();
-   if(isPicked){
-    ctx.beginPath();ctx.arc(0,0,r-6,a,a+arc);ctx.strokeStyle='#fff3c4';ctx.lineWidth=3;ctx.stroke();
-   }
-   if(!isPicked){
-    ctx.rotate(midA);
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    if(n>16){
-     ctx.font='bold 17px Tahoma';ctx.fillStyle=i%4===1?'#111111':'#ffffff';ctx.fillText(String(i+1),r-24,0,95);
-    }else{
-     ctx.font='bold 18px Tahoma';ctx.fillStyle=i%4===1?'#111111':'#ffffff';
-     const label=qs[i].length>32?qs[i].slice(0,30)+'…':qs[i];
-     ctx.fillText(label,r-22,0,270);
-    }
-   }
-   ctx.restore();
+ ctx.save();ctx.translate(mid,mid);ctx.rotate(angle);
+ for(let i=0;i<n;i++){
+  const a=-Math.PI/2+i*arc,midA=a+arc/2,isPicked=i===picked;
+  ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,r,a,a+arc);ctx.closePath();
+  ctx.fillStyle=palette[i%palette.length];ctx.fill();
+  ctx.strokeStyle=isPicked?'#102a43':'#ffffff';ctx.lineWidth=isPicked?8:5;ctx.stroke();
+  if(isPicked){
+   ctx.beginPath();ctx.arc(0,0,r-7,a,a+arc);ctx.strokeStyle='#ffd166';ctx.lineWidth=3;ctx.stroke();
+  }else{
+   ctx.save();ctx.rotate(midA);ctx.textAlign='center';ctx.textBaseline='middle';
+   ctx.font='bold 19px Tahoma';
+   ctx.fillStyle=palette[i%palette.length]==='#ffffff'?'#111111':'#ffffff';
+   ctx.fillText(String(i+1),r-27,0,90);ctx.restore();
   }
  }
  ctx.restore();
- // محور العجلة بنقشة كوفية مبسطة.
- ctx.save();
- ctx.beginPath();ctx.arc(mid,mid,62,0,Math.PI*2);ctx.clip();
- ctx.fillStyle='#ffffff';ctx.fillRect(mid-65,mid-65,130,130);
+ // نقشة كوفية واضحة في مركز العجلة، من دون قرص داكن يحجبها.
+ const cr=65;
+ ctx.save();ctx.beginPath();ctx.arc(mid,mid,cr,0,Math.PI*2);ctx.clip();
+ ctx.fillStyle='#ffffff';ctx.fillRect(mid-cr,mid-cr,cr*2,cr*2);
  ctx.strokeStyle='#111111';ctx.lineWidth=3;
- for(let k=-130;k<=130;k+=16){
-  ctx.beginPath();ctx.moveTo(mid-70+k,mid-70);ctx.lineTo(mid+70+k,mid+70);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(mid-70+k,mid+70);ctx.lineTo(mid+70+k,mid-70);ctx.stroke();
+ for(let k=-150;k<=150;k+=12){
+  ctx.beginPath();ctx.moveTo(mid-cr-10+k,mid-cr-10);ctx.lineTo(mid+cr+10+k,mid+cr+10);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(mid-cr-10+k,mid+cr+10);ctx.lineTo(mid+cr+10+k,mid-cr-10);ctx.stroke();
  }
  ctx.fillStyle='#111111';
  for(let x=mid-48;x<=mid+48;x+=24){
@@ -82,10 +65,10 @@ function draw(){
   }
  }
  ctx.restore();
- ctx.beginPath();ctx.arc(mid,mid,62,0,Math.PI*2);ctx.strokeStyle='#111111';ctx.lineWidth=7;ctx.stroke();
- ctx.font='bold 24px Tahoma';ctx.textAlign='center';ctx.textBaseline='middle';
- ctx.lineWidth=5;ctx.strokeStyle='#ffffff';ctx.strokeText('سؤال',mid,mid);
- ctx.fillStyle='#111111';ctx.fillText('سؤال',mid,mid);
+ ctx.beginPath();ctx.arc(mid,mid,cr,0,Math.PI*2);ctx.strokeStyle='#111111';ctx.lineWidth=5;ctx.stroke();
+ ctx.font='bold 25px Tahoma';ctx.textAlign='center';ctx.textBaseline='middle';
+ ctx.lineJoin='round';ctx.lineWidth=6;ctx.strokeStyle='#111111';ctx.strokeText('سؤال',mid,mid);
+ ctx.fillStyle='#ffffff';ctx.fillText('سؤال',mid,mid);
 }
 function sync(){$('items').value=qs.join('\n');$('count').textContent=qs.length+' أسئلة متاحة';$('spin').disabled=!qs.length||busy;draw()}
 $('spin').onclick=()=>{if(busy||!qs.length)return;busy=true;picked=-1;$('answer').style.display='none';$('show').disabled=$('remove').disabled=true;$('status').textContent='العجلة تدور…';$('picked').textContent='ترقّبوا السؤال!';$('spin').disabled=true;let n=qs.length,i=Math.floor(Math.random()*n),arc=2*Math.PI/n,target=((-(i+.5)*arc)%(2*Math.PI)+2*Math.PI)%(2*Math.PI),start=angle%(2*Math.PI),delta=((target-start)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)+Math.PI*12+Math.random()*Math.PI,t0=performance.now();function tick(now){let p=Math.min(1,(now-t0)/4200);angle=start+delta*(1-Math.pow(1-p,4));draw();if(p<1)requestAnimationFrame(tick);else{angle=target;busy=false;picked=i;draw();$('status').textContent='السؤال المختار هو:';$('picked').textContent=qs[i];$('show').disabled=$('remove').disabled=false;$('spin').disabled=false}}requestAnimationFrame(tick)};
