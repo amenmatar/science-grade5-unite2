@@ -57,7 +57,7 @@ function draw(){
     const fontSize=n>16?10:13;
     ctx.font='bold '+fontSize+'px Tahoma';ctx.fillStyle='#102a43';
     const maxWidth=Math.max(40,Math.min(190,2*(r*.62)*Math.sin(arc/2)-12));
-    const words=qs[i].split(/\\s+/),lines=[];let line='';
+    const words=qs[i].split(/\s+/),lines=[];let line='';
     for(const word of words){
      const test=line?line+' '+word:word;
      if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word;}else line=test;
