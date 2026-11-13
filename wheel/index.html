@@ -24,7 +24,7 @@ const original=[
 ["اقترح طريقة لفصل خليط مكوّن من برادة الحديد والرمل والحصى.","نستخدم الغربال لفصل الحصى بحسب الحجم، ثم المغناطيس لفصل برادة الحديد عن الرمل."]
 ];
 let qs=original.map(x=>x[0]),picked=-1,angle=0,busy=false;
-const $=id=>document.getElementById(id),c=$('wheel'),ctx=c.getContext('2d'),palette=['#176b87','#f2b544','#33866f','#e47754','#5274a8','#8c68a8','#d18a36','#388c9b','#bc637a','#6c8c55'];
+const $=id=>document.getElementById(id),c=$('wheel'),ctx=c.getContext('2d'),palette=['#111111','#ffffff','#007a3d','#ce1126'];
 function draw(){
  let n=qs.length,mid=350,r=320;
  ctx.clearRect(0,0,700,700);
@@ -51,37 +51,41 @@ function draw(){
    if(isPicked){
     ctx.beginPath();ctx.arc(0,0,r-6,a,a+arc);ctx.strokeStyle='#fff3c4';ctx.lineWidth=3;ctx.stroke();
    }
-   ctx.rotate(midA);
-   ctx.textAlign='center';ctx.textBaseline='middle';
-   if(isPicked){
-    const fontSize=n>16?10:13;
-    ctx.font='bold '+fontSize+'px Tahoma';ctx.fillStyle='#102a43';
-    const maxWidth=Math.max(40,Math.min(190,2*(r*.62)*Math.sin(arc/2)-12));
-    const words=qs[i].split(/\s+/),lines=[];let line='';
-    for(const word of words){
-     const test=line?line+' '+word:word;
-     if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word;}else line=test;
+   if(!isPicked){
+    ctx.rotate(midA);
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    if(n>16){
+     ctx.font='bold 17px Tahoma';ctx.fillStyle=i%4===1?'#111111':'#ffffff';ctx.fillText(String(i+1),r-24,0,95);
+    }else{
+     ctx.font='bold 18px Tahoma';ctx.fillStyle=i%4===1?'#111111':'#ffffff';
+     const label=qs[i].length>32?qs[i].slice(0,30)+'…':qs[i];
+     ctx.fillText(label,r-22,0,270);
     }
-    if(line)lines.push(line);
-    const maxLines=n>16?5:6,shown=lines.slice(0,maxLines);
-    if(lines.length>maxLines&&shown.length)shown[shown.length-1]=shown[shown.length-1].replace(/[.…]*$/,'')+'…';
-    const lineH=fontSize+3,startY=-(shown.length-1)*lineH/2;
-    shown.forEach((part,k)=>ctx.fillText(part,r*.62,startY+k*lineH,maxWidth));
-   }else if(n>16){
-    ctx.font='bold 17px Tahoma';ctx.fillStyle='#ffffff';ctx.fillText(String(i+1),r-24,0,95);
-   }else{
-    ctx.font='bold 20px Tahoma';ctx.fillStyle='#ffffff';
-    const label=qs[i].length>32?qs[i].slice(0,30)+'…':qs[i];
-    ctx.fillText(label,r-22,0,270);
    }
    ctx.restore();
   }
  }
  ctx.restore();
- // محور العجلة.
- ctx.beginPath();ctx.arc(mid,mid,62,0,Math.PI*2);ctx.fillStyle='#102a43';ctx.fill();
- ctx.strokeStyle='white';ctx.lineWidth=8;ctx.stroke();
- ctx.fillStyle='white';ctx.font='bold 25px Tahoma';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('سؤال',mid,mid);
+ // محور العجلة بنقشة كوفية مبسطة.
+ ctx.save();
+ ctx.beginPath();ctx.arc(mid,mid,62,0,Math.PI*2);ctx.clip();
+ ctx.fillStyle='#ffffff';ctx.fillRect(mid-65,mid-65,130,130);
+ ctx.strokeStyle='#111111';ctx.lineWidth=3;
+ for(let k=-130;k<=130;k+=16){
+  ctx.beginPath();ctx.moveTo(mid-70+k,mid-70);ctx.lineTo(mid+70+k,mid+70);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(mid-70+k,mid+70);ctx.lineTo(mid+70+k,mid-70);ctx.stroke();
+ }
+ ctx.fillStyle='#111111';
+ for(let x=mid-48;x<=mid+48;x+=24){
+  for(let y=mid-48;y<=mid+48;y+=24){
+   ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);ctx.fillRect(-4,-4,8,8);ctx.restore();
+  }
+ }
+ ctx.restore();
+ ctx.beginPath();ctx.arc(mid,mid,62,0,Math.PI*2);ctx.strokeStyle='#111111';ctx.lineWidth=7;ctx.stroke();
+ ctx.font='bold 24px Tahoma';ctx.textAlign='center';ctx.textBaseline='middle';
+ ctx.lineWidth=5;ctx.strokeStyle='#ffffff';ctx.strokeText('سؤال',mid,mid);
+ ctx.fillStyle='#111111';ctx.fillText('سؤال',mid,mid);
 }
 function sync(){$('items').value=qs.join('\n');$('count').textContent=qs.length+' أسئلة متاحة';$('spin').disabled=!qs.length||busy;draw()}
 $('spin').onclick=()=>{if(busy||!qs.length)return;busy=true;picked=-1;$('answer').style.display='none';$('show').disabled=$('remove').disabled=true;$('status').textContent='العجلة تدور…';$('picked').textContent='ترقّبوا السؤال!';$('spin').disabled=true;let n=qs.length,i=Math.floor(Math.random()*n),arc=2*Math.PI/n,target=((-(i+.5)*arc)%(2*Math.PI)+2*Math.PI)%(2*Math.PI),start=angle%(2*Math.PI),delta=((target-start)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)+Math.PI*12+Math.random()*Math.PI,t0=performance.now();function tick(now){let p=Math.min(1,(now-t0)/4200);angle=start+delta*(1-Math.pow(1-p,4));draw();if(p<1)requestAnimationFrame(tick);else{angle=target;busy=false;picked=i;draw();$('status').textContent='السؤال المختار هو:';$('picked').textContent=qs[i];$('show').disabled=$('remove').disabled=false;$('spin').disabled=false}}requestAnimationFrame(tick)};
